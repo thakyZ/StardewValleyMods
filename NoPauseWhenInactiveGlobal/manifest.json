@@ -6,5 +6,11 @@
     "Description": "Disables pausing the game when the window is inactive globally, instead of per save.\nWill still respect each save's setting for whether or not to pause the game.",
     "UniqueID": "NekoBoiNick.NoPauseWhenInactiveGlobal",
     "EntryDll": "NoPauseWhenInactiveGlobal.dll",
-    "UpdateKeys": [ "Nexus:????" ]
+    "UpdateKeys": [ "Nexus:19250" ],
+    "Dependencies": [
+        {
+            "UniqueID": "spacechase0.GenericModConfigMenu",
+            "Required": false
+        }
+    ]
 }
