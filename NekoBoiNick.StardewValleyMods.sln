@@ -3,17 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoPauseWhenInactiveGlobal", "NoPauseWhenInactiveGlobal\NoPauseWhenInactiveGlobal.csproj", "{8B81BD5F-E37E-43E6-BA56-4B3B160095B3}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{6A73B922-A9D5-454F-B86E-177E96D0839F}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		common.targets = common.targets
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoPauseWhenInactiveGlobal", "NoPauseWhenInactiveGlobal\NoPauseWhenInactiveGlobal.csproj", "{8B81BD5F-E37E-43E6-BA56-4B3B160095B3}"
+EndProject
+Project("{150ea762-8cd9-4da8-91f2-8e3f44e003e3}") = "_Common", "_Common\_Common.shproj", "{746C7502-784C-40D9-BB76-B0D9DF5E4049}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		_Common\_Common.projitems*{8b81bd5f-e37e-43e6-ba56-4b3b160095b3}*SharedItemsImports = 15
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

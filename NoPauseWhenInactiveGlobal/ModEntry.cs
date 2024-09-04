@@ -1,101 +1,88 @@
 using System.Diagnostics.CodeAnalysis;
 
 using GenericModConfigMenu;
+using NekoBoiNick.Common;
+using NekoBoiNick.Common.Extensions;
+using NekoBoiNick.Common.Integrations;
 
 using HarmonyLib;
 
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using NoPauseWhenInactiveGlobal.Framework;
 
 namespace NoPauseWhenInactiveGlobal;
 
 /// <inheritdoc />
-public class ModEntry : Mod
-{
-    /// <summary>
-    /// This mod's config instance.
-    /// </summary>
-    [NotNull, AllowNull]
-    internal static ModConfig Config { get; private set; }
+public class ModEntry : Mod {
+#region  Properties
+  /// <summary>
+  /// This mod's config instance.
+  /// </summary>
+  internal static ModConfig Config { get; private set; } = null!;
 
-    /// <summary>
-    /// The Logging function for the mod.
-    /// </summary>
-    [NotNull, AllowNull]
-    internal static IMonitor Logger { get; private set; }
+  /// <summary>
+  /// The Logging function for the mod.
+  /// </summary>
+  internal static IMonitor IMonitor { get; private set; } = null!;
 
-    /// <summary>
-    /// The SMAPI mod helper instance.
-    /// </summary>
-    [NotNull, AllowNull]
-    internal static IModHelper ModHelper { get; private set; }
+  /// <summary>
+  /// The SMAPI mod helper instance.
+  /// </summary>
+  internal static IModHelper ModHelper { get; private set; } = null!;
 
-    /// <summary>
-    /// A bool to check if a save game has been loaded or not.
-    /// </summary>
-    internal static bool IsSaveLoaded { get; private set; } = false;
+  /// <summary>
+  /// A bool to check if a save game has been loaded or not.
+  /// </summary>
+  internal static bool IsSaveLoaded { get; private set; } = false;
+#endregion
 
-    /// <inheritdoc />
-    public override void Entry(IModHelper modHelper)
-    {
-        ModHelper = modHelper;
-        Logger = this.Monitor;
-        I18n.Init(modHelper.Translation);
-        Config = ModHelper.ReadConfig<ModConfig>();
-        modHelper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
-        modHelper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
-        modHelper.Events.GameLoop.ReturnedToTitle += this.OnReturnedToTitle;
-        // Patch all harmony methods via attributes found in the same namespace or descendants.
-        new Harmony("NekoBoiNick.NoPauseWhenInactiveGlobal").PatchAll();
-    }
+#region Public methods
+  /// <inheritdoc />
+  public override void Entry(IModHelper modHelper) {
+      ModHelper = modHelper;
+      IMonitor = this.Monitor;
+      I18n.Init(modHelper.Translation);
+      Config = ModHelper.ReadConfig<ModConfig>();
+      modHelper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+      modHelper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
+      modHelper.Events.GameLoop.ReturnedToTitle += this.OnReturnedToTitle;
+      // Patch all harmony methods via attributes found in the same namespace or descendants.
+      new Harmony("NekoBoiNick.NoPauseWhenInactiveGlobal").PatchAll();
+  }
+#endregion
 
-    /// <summary>
-    /// Sets the property <see cref="IsSaveLoaded"/> to <see cref="false"/>, when returning back to the main menu.
-    /// </summary>
-    /// <param name="sender">The event sender.</param>
-    /// <param name="e">The event arguments.</param>
-    private void OnReturnedToTitle(object? sender, ReturnedToTitleEventArgs e)
-    {
-        IsSaveLoaded = false;
-    }
+#region Private methods
+#region Event handlers
+  /// <summary>
+  /// Sets the property <see cref="IsSaveLoaded"/> to <see cref="false"/>, when returning back to the main menu.
+  /// </summary>
+  /// <param name="sender">The event sender.</param>
+  /// <param name="e">The event arguments.</param>
+  private void OnReturnedToTitle(object? sender, ReturnedToTitleEventArgs e) => IsSaveLoaded = false;
 
-    /// <summary>
-    /// Sets the property <see cref="IsSaveLoaded"/> to <see cref="true"/>, when loading a save game.
-    /// </summary>
-    /// <param name="sender">The event sender.</param>
-    /// <param name="e">The event arguments.</param>
-    private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
-    {
-        IsSaveLoaded = true;
-    }
+  /// <summary>
+  /// Sets the property <see cref="IsSaveLoaded"/> to <see cref="true"/>, when loading a save game.
+  /// </summary>
+  /// <param name="sender">The event sender.</param>
+  /// <param name="e">The event arguments.</param>
+  private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e) => IsSaveLoaded = true;
+#endregion
 
-    /// <summary>
-    /// Implements the GenericModConfig options menu if it is loaded into the game.
-    /// </summary>
-    /// <param name="sender">The event sender.</param>
-    /// <param name="e">The event arguments.</param>
-    private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
-    {
-        // get Generic Mod Config Menu's API (if it's installed)
-        var configMenu = this.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
-        if (configMenu is not null)
-        {
-            // register mod
-            configMenu.Register(
-                mod: this.ModManifest,
-                reset: () => Config = new ModConfig(),
-                save: () => this.Helper.WriteConfig(Config),
-                titleScreenOnly: true
-            );
-
-            // Add the config option to disable pausing of the game outside of a save.
-            configMenu.AddBoolOption(
-                mod: this.ModManifest,
-                name: () => ModHelper.Translation.Get("nopausewheninative.global.option.name"),
-                tooltip: () => ModHelper.Translation.Get("nopausewheninative.global.option.tooltip"),
-                getValue: () => Config.DisableGamePause,
-                setValue: value => Config.DisableGamePause = value
-            );
-        }
-    }
+#region Methods
+  /// <summary>
+  /// Implements the GenericModConfig options menu if it is loaded into the game.
+  /// </summary>
+  /// <param name="sender">The event sender.</param>
+  /// <param name="e">The event arguments.</param>
+  private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
+    GenericModConfigMenuIntegration.Register(this.ModManifest, this.Helper.ModRegistry, this.Monitor,
+      getConfig: () => Config,
+      reset: () => Config = new(),
+      save: () => this.Helper.WriteConfig(Config),
+      titleScreenOnly: true
+    );
+  }
+#endregion
+#endregion
 }

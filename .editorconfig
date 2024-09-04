@@ -9,24 +9,25 @@ root = true
 ##########
 [*]
 indent_style = space
-indent_size = 4
+indent_size = 2
+tab_width = 4
 end_of_line = crlf
 charset = utf-8
+
 trim_trailing_whitespace = true
 insert_final_newline = true
+
 vsspell_section_id = 6bdf12225279496f92bd3a99afebd706
 vsspell_dictionary_languages_6bdf12225279496f92bd3a99afebd706 = inherited,en-US
 vsspell_exclusion_expressions_6bdf12225279496f92bd3a99afebd706 = (?<=SetDefault)[Ii]n[Gg]ame(?=OptinValue)(?@@PND@@ Ignore the way In-Game is spelled.)(?@@PND@@/Options/None)[Oo]pt-?[Ii]n(?@@PND@@ Ignore Opt-In without a hyphen.)(?@@PND@@/Options/None)
 
-[*.{csproj,nuspec,props,targets}]
+[*.{csproj,nuspec,props,targets,shproj,projitems}]
 indent_size = 2
-
-[*.csproj]
-charset = utf-8-bom
+charset = utf-8
 insert_final_newline = false
 
 [*.{json,md}]
-charset = utf-8-bom
+charset = utf-8
 
 [*.{ttinclude,tt}]
 insert_final_newline = false

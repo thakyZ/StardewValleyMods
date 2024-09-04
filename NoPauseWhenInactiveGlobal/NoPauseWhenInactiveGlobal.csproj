@@ -16,11 +16,11 @@
   <PropertyGroup>
     <Authors>Neko Boi Nick</Authors>
     <Company>$(Authors)</Company>
-    <Copyright>Copyright (c) 2023 Neko Boi Nick</Copyright>
+    <Copyright>Copyright (c) 2024 Neko Boi Nick</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
 
@@ -35,14 +35,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>Latest</LangVersion>
     <EnableHarmony>True</EnableHarmony>
     <Nullable>Enable</Nullable>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <GenericModConfigMenu Condition="!Exists('$(GenericModConfigMenu)')">$(GamePath)\Mods\GenericModConfigMenu\GenericModConfigMenu.dll</GenericModConfigMenu>
   </PropertyGroup>
 
   <ItemGroup>
@@ -52,7 +48,9 @@
 
   <ItemGroup>
     <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
-    <PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder" Version="2.0.1" />
-    <Reference Include="GenericModConfigMenu" HintPath="$(GenericModConfigMenu)" Private="False" />
+    <PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder" Version="2.2.0" />
   </ItemGroup>
+
+  <Import Project="..\_Common\_Common.projitems" Label="Shared" />
+  <Import Project="..\common.targets" />
 </Project>
