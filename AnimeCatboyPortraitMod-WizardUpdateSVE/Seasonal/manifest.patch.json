@@ -1,0 +1,17 @@
+[
+  {
+    "op": "add",
+    "path": "/Dependencies/-",
+    "value": {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "IsRequired": true
+    }
+  },
+  {
+    "op": "add",
+    "path": "/ContentPackFor",
+    "value": {
+      "UniqueID": "Pathoschild.ContentPatcher"
+    }
+  }
+]

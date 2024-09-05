@@ -1,0 +1,10 @@
+[
+  {
+    "op": "add",
+    "path": "/Dependencies/-",
+    "value": {
+      "UniqueID": "Platonymous.Portraiture",
+      "Required": true
+    }
+  }
+]

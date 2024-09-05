@@ -1,0 +1,19 @@
+{
+  "Name": "[CP] Anime Catboy Sprites - Wizard Update SVE",
+  "Author": "MousyModder & Neko Boi Nick & Jellonip",
+  "Version": "1.0.1",
+  "Description": "Sprites that match finnsinn's edit of gigi's portrait mod for added immersion - Updated to have the full wizard sprites for SVE",
+  "UniqueID": "NekoBoiNick.AnimeCatboySprites.Wizard.SVE",
+  "MinimumApiVersion": "3.0",
+  "UpdateKeys": [ "Nexus:19236" ],
+  "Dependencies": [
+    {
+      "UniqueID": "FlashShifter.StardewValleyExpandedCP",
+      "IsRequired": true
+    },
+    {
+      "UniqueID": "MousyModder.AnimeCatboySprites",
+      "IsRequired": false
+    }
+  ]
+}

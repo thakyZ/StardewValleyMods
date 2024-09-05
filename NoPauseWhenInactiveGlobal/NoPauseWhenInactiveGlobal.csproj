@@ -35,8 +35,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>Latest</LangVersion>
     <EnableHarmony>True</EnableHarmony>
     <Nullable>Enable</Nullable>
   </PropertyGroup>

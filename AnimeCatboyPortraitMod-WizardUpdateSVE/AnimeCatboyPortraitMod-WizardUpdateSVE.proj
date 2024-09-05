@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+  <PropertyGroup>
+    <Version>1.0.1</Version>
+    <Flavor>None</Flavor>
+    <OutputName>Anime Catboy Portrait Mod - Wizard SVE - $(Flavor) - $(Version)</OutputName>
+    <BuildDir>$(ProjectDir)\build</BuildDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(SolutionDir)' == '' ">
+    <SolutionDir>$(ProjectDir)..\</SolutionDir>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(Flavor)' == 'Portraiture' ">
+    <Compile Include="$(ProjectDir)Anime Catboy Portrait Mod - Wizard SVE\*.json" />
+    <Compile Include="$(ProjectDir)Anime Catboy Portrait Mod - Wizard SVE\*.png" />
+    <Compile Remove="$(ProjectDir)Portraiture\*.patch.json" />
+    <Compile Include="$(ProjectDir)Portraiture\**\*.png" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(Flavor)' == 'ContentPatcher' ">
+    <Compile Include="$(ProjectDir)Anime Catboy Portrait Mod - Wizard SVE\*.png" />
+    <Compile Include="$(ProjectDir)ContentPatcher\*.json" />
+    <Compile Remove="$(ProjectDir)ContentPatcher\*.patch.json" />
+    <Compile Include="$(ProjectDir)ContentPatcher\**\*.png" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(Flavor)' == 'ContentPatcher-Seasonal' ">
+    <Compile Include="$(ProjectDir)Anime Catboy Portrait Mod - Wizard SVE\*.png" />
+    <Compile Include="$(ProjectDir)Seasonal\*.json" />
+    <Compile Remove="$(ProjectDir)Seasonal\*.patch.json" />
+    <Compile Include="$(ProjectDir)Seasonal\**\*.png" />
+  </ItemGroup>
+
+  <Import Project="..\common.targets" />
+
+  <Target Name="Release" AfterTargets="Build" Condition=" '$(Flavor)' != 'None' ">
+    <Message Text="ProjectDir = &quot;$(ProjectDir)&quot;" Importance="High" />
+    <Message Text="SolutionDir = &quot;$(SolutionDir)&quot;" Importance="High" />
+    <Exec Command="$(SolutionDir)lib\patch_json.exe --patch &quot;$(ProjectDir)$(Flavor)\manifest.patch.json&quot; -- &quot;$(ProjectDir)Main\manifest.json&quot; &quot;$(ProjectDir)$(Flavor)\manifest.json&quot;"/>
+    <RemoveDir Directories="@(BuildDir)" />
+    <MakeDir Directories="@(BuildDir)" />
+    <Copy DestinationFolder="$(BuildDir)" SourceFiles="@(Compile)" />
+  </Target>
+</Project>

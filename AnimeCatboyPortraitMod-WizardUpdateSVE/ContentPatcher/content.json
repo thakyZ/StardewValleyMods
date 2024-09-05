@@ -1,0 +1,15 @@
+{
+  "Format": "1.24",
+  "Changes": [
+    //Wizard
+    {
+      "Action": "Load",
+      "Target": "Characters/Wizard",
+      "When": {
+		    // "Sprite": "vanilla",
+        "HasMod |contains=FlashShifter.StardewValleyExpandedCP": false
+      },
+      "FromFile": "assets/Wizard.png"
+    }
+  ]
+}

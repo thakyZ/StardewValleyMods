@@ -1,0 +1,6 @@
+virtualenv
+wheel
+setuptools
+twine
+pyinstaller
+types-jsonpatch
