@@ -1,0 +1,10 @@
+{
+  "Name": "ClearFarmDebris",
+  "Author": "David Renne",
+  "Version": "1.0.1",
+  "Description": "This mod will clear all debris from your farm so you can begin building stuff quick on new save states",
+  "UniqueID": "DavidRenne.ClearFarmDebris",
+  "EntryDll": "ClearFarmDebris.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": []
+}

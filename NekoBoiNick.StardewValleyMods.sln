@@ -13,14 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{6A73B922-A
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoPauseWhenInactiveGlobal", "NoPauseWhenInactiveGlobal\NoPauseWhenInactiveGlobal.csproj", "{8B81BD5F-E37E-43E6-BA56-4B3B160095B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoPauseWhenInactiveGlobal", "NoPauseWhenInactiveGlobal\NoPauseWhenInactiveGlobal.csproj", "{8B81BD5F-E37E-43E6-BA56-4B3B160095B3}"
 EndProject
-Project("{150ea762-8cd9-4da8-91f2-8e3f44e003e3}") = "_Common", "_Common\_Common.shproj", "{746C7502-784C-40D9-BB76-B0D9DF5E4049}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "_Common", "_Common\_Common.shproj", "{746C7502-784C-40D9-BB76-B0D9DF5E4049}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearFarmDebris", "ClearFarmDebris\ClearFarmDebris.csproj", "{D1C3BE3E-1A6C-4EC9-A1D5-265E06172293}"
+EndProject
+Project("{13B669BE-BB05-4DDF-9536-439F39A36129}") = "AnimeCatboyPortraitMod-WizardUpdateSVE", "AnimeCatboyPortraitMod-WizardUpdateSVE\AnimeCatboyPortraitMod-WizardUpdateSVE.msbuildproj", "{4E247A83-836D-4D66-9729-8059A26874B2}"
 EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		_Common\_Common.projitems*{8b81bd5f-e37e-43e6-ba56-4b3b160095b3}*SharedItemsImports = 15
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -30,11 +31,24 @@ Global
 		{8B81BD5F-E37E-43E6-BA56-4B3B160095B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B81BD5F-E37E-43E6-BA56-4B3B160095B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B81BD5F-E37E-43E6-BA56-4B3B160095B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1C3BE3E-1A6C-4EC9-A1D5-265E06172293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1C3BE3E-1A6C-4EC9-A1D5-265E06172293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1C3BE3E-1A6C-4EC9-A1D5-265E06172293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1C3BE3E-1A6C-4EC9-A1D5-265E06172293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E247A83-836D-4D66-9729-8059A26874B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E247A83-836D-4D66-9729-8059A26874B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E247A83-836D-4D66-9729-8059A26874B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E247A83-836D-4D66-9729-8059A26874B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3841CE05-8418-4EB3-AE9E-B3EECA41775A}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		_Common\_Common.projitems*{746c7502-784c-40d9-bb76-b0d9df5e4049}*SharedItemsImports = 13
+		_Common\_Common.projitems*{8b81bd5f-e37e-43e6-ba56-4b3b160095b3}*SharedItemsImports = 5
+		_Common\_Common.projitems*{d1c3be3e-1a6c-4ec9-a1d5-265e06172293}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

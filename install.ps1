@@ -46,7 +46,7 @@ DynamicParam {
   $Mod = $PSBoundParameters['Mod'];
 
   If ([string]::IsNullOrEmpty($Destination)) {
-    $Destination = (Join-Path -Path $env:MO2_PROFILES -ChildPath 'StardewValley' -AdditionalChildPath @('mods', 'TimeSpeed', 'TimeSpeed'));
+    $Destination = (Join-Path -Path $env:MO2_PROFILES -ChildPath 'StardewValley' -AdditionalChildPath @('mods', $Mod, $Mod));
   }
 
   If (-not (Test-Path -LiteralPath $Destination -PathType Container)) {
@@ -151,15 +151,12 @@ DynamicParam {
   }
 } Process {
   [Process] $DotNetProcess = (Start-Process -NoNewWindow -FilePath $DotNet -Wait -ArgumentList @('build', "$(Join-Path -Path $PSScriptRoot -ChildPath 'NekoBoiNick.StardewValleyMods.sln')", "-property:Configuration=$($Configuration)") -PassThru);
-  While (-not $DotNetProcess.HasExited) {
-    Start-Sleep -Seconds 5;
-  }
   If ($DotNetProcess.ExitCode -ne 0) {
     Write-Error -Message "DotNet exited with exit code $($DotNetProcess.ExitCode).";
     Exit 1;
   }
   If ($Null -ne $7Zip) {
-    [string] $OutputDir = (Join-Path -Path $PSScriptRoot -ChildPath '_releases');
+    [string] $OutputDir = (Join-Path -Path $PSScriptRoot -ChildPath 'dist');
     If (-not [Directory]::Exists($OutputDir)) {
       $OutputDir = (New-Item -Path $OutputDir -ItemType Directory).FullName;
     }
@@ -168,15 +165,14 @@ DynamicParam {
       Remove-Item -LiteralPath $OutputFile -Force -ErrorAction Stop;
     }
     [Process] $7ZipProcess = (Start-Process -NoNewWindow -FilePath $7Zip.Source -Wait -ArgumentList @('a', $OutputFile, $TranslationDir, $BuildOutput, $ManifestFile) -PassThru);
-    While (-not $7ZipProcess.HasExited) {
-      Start-Sleep -Seconds 5;
-    }
     If ($7ZipProcess.ExitCode -ne 0) {
       Write-Error -Message "7-Zip exited with exit code $($7ZipProcess.ExitCode).";
       Exit 1;
     }
     Write-Host -Object "Mod packaged to file at: `"$($OutputFile)`"";
   }
+
+  Write-Host -Object "Copied to $($Destination)";
 
   Copy-Item -LiteralPath $TranslationDir -Recurse -Force -Destination $Destination -ErrorAction Stop;
   Copy-item -LiteralPath $BuildOutput -Force -Destination (Join-Path -Path $Destination -ChildPath "$($Mod).dll") -ErrorAction Stop;

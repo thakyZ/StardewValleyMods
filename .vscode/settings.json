@@ -1,5 +1,22 @@
 {
   "files.associations": {
     "*.json": "jsonc"
-  }
+  },
+  "cSpell.dictionaries": [
+    "en_US",
+    "companies",
+    "softwareTerms",
+    "misc",
+    "python",
+    "powershell",
+    "csharp",
+    "bash",
+    "fonts",
+    "filetypes",
+    "stardew"
+  ],
+  "cSpell.words": [
+    "Renne",
+    "golanggopher",
+  ],
 }

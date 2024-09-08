@@ -1,0 +1,4 @@
+{
+  "config.clear-farm-key.name": "Clear farm key",
+  "config.clear-farm-key.desc": "Keybind to clear the farm of all derbis."
+}

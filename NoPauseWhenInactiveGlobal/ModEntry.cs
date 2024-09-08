@@ -76,12 +76,12 @@ public class ModEntry : Mod {
   /// <param name="sender">The event sender.</param>
   /// <param name="e">The event arguments.</param>
   private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
+    // ReSharper disable once ArrangeMethodOrOperatorBody
     GenericModConfigMenuIntegration.Register(this.ModManifest, this.Helper.ModRegistry, this.Monitor,
-      getConfig: () => Config,
-      reset: () => Config = new(),
-      save: () => this.Helper.WriteConfig(Config),
-      titleScreenOnly: true
-    );
+                                             getConfig: () => Config,
+                                             reset: () => Config = new(),
+                                             save: () => this.Helper.WriteConfig(Config),
+                                             titleScreenOnly: true);
   }
 #endregion
 #endregion
