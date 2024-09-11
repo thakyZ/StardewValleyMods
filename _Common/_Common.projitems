@@ -6,9 +6,9 @@
     <SharedGUID>b06b1e54-ddd9-498d-8360-60ee0f0ee41e</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>_Common</Import_RootNamespace>
+    <Import_RootNamespace>NekoBoiNick.Common</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)**\*.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)**/*.cs" />
   </ItemGroup>
 </Project>

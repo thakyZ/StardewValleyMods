@@ -1,5 +1,7 @@
 using System.IO;
 
+// ReSharper disable UnusedMember.Global
+
 namespace NekoBoiNick.Common;
 
 /// <summary>
@@ -18,13 +20,14 @@ internal static class CommonHelper {
 
     foreach (string relativePath in relativePaths) {
       string fullPath = Path.Combine(basePath, relativePath);
-      if (File.Exists(fullPath)) {
-        try {
-            File.Delete(fullPath);
-            mod.Monitor.Log($"Removed obsolete file '{relativePath}'.");
-        } catch (Exception exception) {
-            mod.Monitor.Log($"Failed deleting obsolete file '{relativePath}':\n{exception}");
-        }
+
+      if (!File.Exists(fullPath)) continue;
+
+      try {
+        File.Delete(fullPath);
+        mod.Monitor.Log($"Removed obsolete file '{relativePath}'.");
+      } catch (Exception exception) {
+        mod.Monitor.Log($"Failed deleting obsolete file '{relativePath}':\n{exception}");
       }
     }
   }
